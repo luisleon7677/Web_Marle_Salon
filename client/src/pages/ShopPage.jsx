@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaStar, FaHeart, FaChevronDown, FaSlidersH, FaTimes } from 'react-icons/fa'
 import { categories, priceRanges } from '../data/shopData'
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 
 
@@ -28,7 +29,7 @@ export default function ShopPage() {
   useEffect(() => {
     async function getProducts() {
       try {
-        const response = await fetch('https://webmarlesalonserve-production.up.railway.app/products');
+        const response = await fetch(`${API_URL}/products`);
 
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);

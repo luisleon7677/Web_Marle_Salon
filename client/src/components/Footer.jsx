@@ -38,17 +38,17 @@ export default function Footer() {
           </div>
 
           <div className="footer-product">
-            <h2 className="footer-heading">Featured Product</h2>
+            {/* <h2 className="footer-heading">Featured Product</h2> */}
             <Link to="/shop">
-              <img src="/images/product_1_bg.jpg" alt="Leather Brown Shoe" className="mb-3" />
+              <img src="/logoo.png" alt="Leather Brown Shoe" className="mb-3" />
             </Link>
-            <h4 className="h5">Leather Brown Shoe</h4>
+            {/* <h4 className="h5">Leather Brown Shoe</h4>
             <strong className="text-black mb-3" style={{ display: 'inline-block' }}>
               $60.00
             </strong>
             <p>
               <Link to="/shop" className="btn btn-black rounded-0">Add to Cart</Link>
-            </p>
+            </p> */}
           </div>
         </div>
 
