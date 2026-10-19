@@ -1,7 +1,8 @@
 import { useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { FaStar, FaHeart, FaChevronDown, FaSlidersH, FaTimes } from 'react-icons/fa'
+import { FaStar, FaHeart, FaChevronDown, FaSlidersH, FaTimes, FaEye } from 'react-icons/fa'
 import { categories, priceRanges } from '../data/shopData'
+import ProductDetail from '../components/ProductDetail'
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 
@@ -23,7 +24,8 @@ export default function ShopPage() {
   const [selectedPrices, setSelectedPrices] = useState([])
   const [sortBy, setSortBy] = useState('featured')
   const [filtersOpen, setFiltersOpen] = useState(false)
-  const [shopProducts, setShopProducts] = useState([]);
+  const [shopProducts, setShopProducts] = useState([])
+  const [selectedProduct, setSelectedProduct] = useState(null)
 
   //carga de productos
   useEffect(() => {
@@ -178,19 +180,34 @@ export default function ShopPage() {
 
           <div className="shop-grid">
             {filtered.map((product) => (
-              <article className="shop-card" key={product.id}>
+              <article
+                className="shop-card"
+                key={product.id}
+                onClick={() => setSelectedProduct(product)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="shop-card-media">
                   {product.badge && (
                     <span className={`shop-badge shop-badge--${product.badge.type}`}>
                       {product.badge.label}
                     </span>
                   )}
-                  <button type="button" className="shop-wishlist" aria-label="Wishlist">
+                  <button
+                    type="button"
+                    className="shop-wishlist"
+                    aria-label="Wishlist"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <FaHeart />
                   </button>
                   <img src={product.image} alt={product.name} />
-                  <button type="button" className="shop-card-cart" onClick={mostrarAlerta}>
-                    WhatsApp
+                  <button
+                    type="button"
+                    className="shop-card-cart"
+                    onClick={(e) => { e.stopPropagation(); setSelectedProduct(product); }}
+                  >
+                    <FaEye style={{ marginRight: 6 }} />
+                    Ver detalle
                   </button>
                 </div>
                 <div className="shop-card-body">
@@ -229,6 +246,12 @@ export default function ShopPage() {
         </div>
         {Sidebar}
       </div>
+      {selectedProduct && (
+        <ProductDetail
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
+      )}
     </div>
   )
 }
