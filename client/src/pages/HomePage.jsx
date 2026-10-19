@@ -18,7 +18,7 @@ export default function HomePage() {
       <Newsletter />
       <FeaturedProducts />
       <About />
-      <Team />
+      {/* <Team /> */}
       <SpecialPromo />
       <Services />
       <Testimonials />

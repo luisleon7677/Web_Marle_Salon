@@ -1,4 +1,4 @@
-import { useMemo, useState,useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaStar, FaHeart, FaChevronDown, FaSlidersH, FaTimes } from 'react-icons/fa'
 import { categories, priceRanges } from '../data/shopData'
@@ -22,22 +22,22 @@ export default function ShopPage() {
   const [selectedPrices, setSelectedPrices] = useState([])
   const [sortBy, setSortBy] = useState('featured')
   const [filtersOpen, setFiltersOpen] = useState(false)
-  const [shopProducts,setShopProducts]= useState([]);
+  const [shopProducts, setShopProducts] = useState([]);
 
   //carga de productos
   useEffect(() => {
     async function getProducts() {
       try {
-        const response = await fetch('http://localhost:3000/products');
-  
+        const response = await fetch('https://webmarlesalonserve-production.up.railway.app/products');
+
         if (!response.ok) {
           throw new Error(`Error HTTP: ${response.status}`);
         }
-  
+
         const data = await response.json();
-  
+
         console.log('Respuesta completa del backend:', data);
-  
+
         // Si el backend devuelve directamente un array
         if (Array.isArray(data)) {
           setShopProducts(data);
@@ -52,9 +52,13 @@ export default function ShopPage() {
         console.error('Error al obtener productos:', error);
       }
     }
-  
+
     getProducts();
   }, []);
+
+  const mostrarAlerta = () => {
+    alert('¡Producto registrado correctamente!');
+  };
 
   const filtered = useMemo(() => {
     let list = shopProducts.filter((product) => {
@@ -184,8 +188,8 @@ export default function ShopPage() {
                     <FaHeart />
                   </button>
                   <img src={product.image} alt={product.name} />
-                  <button type="button" className="shop-card-cart">
-                    Add to Cart
+                  <button type="button" className="shop-card-cart" onClick={mostrarAlerta}>
+                    WhatsApp
                   </button>
                 </div>
                 <div className="shop-card-body">

@@ -8,7 +8,7 @@ const pool = require('./src/config/database');
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173', // URL de tu frontend React
+  origin: process.env.URL_FRONTEND || 'http://localhost:5173', // URL de tu frontend React
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -32,7 +32,7 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-app.get('/products',async (req, res)=>{
+app.get('/products', async (req, res) => {
   try {
 
     const produts = await pool.query('select * from "products"')
@@ -40,11 +40,11 @@ app.get('/products',async (req, res)=>{
     res.json({
       products: produts.rows,
     });
-    
+
   } catch (error) {
     console.error(error);
     res.status(500).json({
-      response:'Error en consulta de products'
+      response: 'Error en consulta de products'
     })
   }
 })
@@ -71,8 +71,8 @@ app.get('/categories', async (req, res) => {
 
 
 
-app.get('/users',async (req,res)=>{
-  try{
+app.get('/users', async (req, res) => {
+  try {
 
     const users = await pool.query('SELECT * FROM "user"')
     res.json({
@@ -80,7 +80,7 @@ app.get('/users',async (req,res)=>{
       users: users.rows,
     });
 
-  }catch (error) {
+  } catch (error) {
     console.error(error);
 
     res.status(500).json({

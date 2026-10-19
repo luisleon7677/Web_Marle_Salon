@@ -6,18 +6,15 @@ export default function About() {
           <div className="about-media">
             <img src="/images/about_1.jpg" alt="About us" />
             <div className="experience">
-              <span className="year">Trusted Merchant</span>
-              <span className="caption">for 50 years</span>
+              <span className="year">Llevando belleza</span>
+              <span className="caption">a todo el Perú</span>
             </div>
           </div>
           <div>
-            <h3 className="section-sub-title">Merchant Company</h3>
-            <h2 className="section-title mb-3">About Us</h2>
+            <h3 className="section-sub-title">Marle Store</h3>
+            <h2 className="section-title mb-3">Nosotros</h2>
             <p className="mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui fuga
-              ipsa, repellat blanditiis nihil, consectetur. Consequuntur eum
-              inventore, rem maxime, nisi excepturi ipsam libero ratione
-              adipisci alias eius vero vel!
+            En Marle Store nos dedicamos a la venta de productos capilares de alta calidad y ofrecemos servicios profesionales en nuestro salón de belleza. Somos distribuidores autorizados de las mejores marcas para el cuidado y la belleza del cabello.
             </p>
             <p>
               <a href="#" className="btn btn-black btn-black--hover rounded-0">

@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 const testimonials = [
-  { name: 'John Smith', image: '/images/person_3.jpg' },
-  { name: 'Robert Aguilar', image: '/images/person_2.jpg' },
-  { name: 'Roger Spears', image: '/images/person_4.jpg' },
-  { name: 'Kyle McDonald', image: '/images/person_1.jpg' },
+  { name: 'Sara Herrera', image: '/images/person_3.jpg' , test:'Estoy encantada con los resultados de Marle Salon. Mi cabello quedó suave, brillante y hermoso. La atención fue excelente y los productos que utilizan son increíbles. ¡Lo recomiendo totalmente!'},
+  { name: 'Melissa  Aguilar', image: '/images/person_2.jpg' , test:'Me encantó mi cambio de look. El balayage quedó precioso, con tonos naturales que iluminan mi cabello. Cuidaron cada detalle y el resultado superó mis expectativas.'},
+  { name: 'Sofia Puma', image: '/images/person_4.jpg' , test:'Los productos capilares de Marle Salon se han convertido en mis favoritos. Mi cabello luce más hidratado, suave y brillante. Me encanta poder cuidarlo también en casa.'},
+  { name: 'Adelis Contreras', image: '/images/person_1.jpg' , test:'Mi experiencia fue excelente. Me realicé un alisado y quedé feliz con el resultado. Mi cabello luce hermoso y es mucho más fácil de peinar. ¡Volveré pronto!'},
 ]
 
 const quote =
@@ -22,8 +22,8 @@ export default function Testimonials() {
     <section className="site-section testimonial-wrap" id="testimonials-section">
       <div className="container">
         <div className="section-header">
-          <h3 className="section-sub-title">People Says</h3>
-          <h2 className="section-title mb-3">Testimonials</h2>
+          <h3 className="section-sub-title">La gente dice</h3>
+          <h2 className="section-title mb-3">Testimonios</h2>
         </div>
 
         <div className="testimonial-slider">
@@ -32,7 +32,7 @@ export default function Testimonials() {
               <img src={current.image} alt={current.name} />
             </figure>
             <blockquote className="mb-3">
-              <p>&ldquo;{quote}&rdquo;</p>
+              <p>&ldquo;{current.test}&rdquo;</p>
             </blockquote>
             <p className="text-black"><strong>{current.name}</strong></p>
           </div>
