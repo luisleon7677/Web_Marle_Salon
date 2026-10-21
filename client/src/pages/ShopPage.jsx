@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { FaStar, FaHeart, FaChevronDown, FaSlidersH, FaTimes, FaEye } from 'react-icons/fa'
+import { FaStar, FaShoppingCart, FaChevronDown, FaSlidersH, FaTimes, FaEye } from 'react-icons/fa'
+import { useCart } from '../components/CartProvider'
 import { categories, priceRanges } from '../data/shopData'
 import ProductDetail from '../components/ProductDetail'
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
@@ -25,6 +26,7 @@ function matchesPrice(product, selectedPrices) {
 }
 
 export default function ShopPage() {
+  const { addItem } = useCart()
   const [category, setCategory] = useState('all')
   const [selectedLine, setSelectedLine] = useState('')
   const [selectedPrices, setSelectedPrices] = useState([])
@@ -240,11 +242,12 @@ export default function ShopPage() {
                   )}
                   <button
                     type="button"
-                    className="shop-wishlist"
-                    aria-label="Wishlist"
-                    onClick={(e) => e.stopPropagation()}
+                    className="shop-add-cart"
+                    aria-label={`Agregar ${product.name} al carrito`}
+                    title="Agregar al carrito"
+                    onClick={(e) => { e.stopPropagation(); addItem(product) }}
                   >
-                    <FaHeart />
+                    <FaShoppingCart />
                   </button>
                   <img src={product.image} alt={product.name} />
                   <button

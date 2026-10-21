@@ -1,9 +1,12 @@
 import { useEffect } from 'react'
+import { FaShoppingCart } from 'react-icons/fa'
+import { useCart } from './CartProvider'
 import { FaStar, FaTimes, FaWhatsapp, FaTag, FaShieldAlt, FaTruck } from 'react-icons/fa'
 
 const WHATSAPP_NUMBER = '50900184348' // ← cambia este número al tuyo
 
 export default function ProductDetail({ product, onClose }) {
+  const { addItem } = useCart()
   // Cerrar con ESC
   useEffect(() => {
     const handleKey = (e) => {
@@ -101,6 +104,9 @@ export default function ProductDetail({ product, onClose }) {
             </ul>
 
             {/* Botón WhatsApp */}
+            <button type="button" className="pd-add-cart" onClick={() => addItem(product)}>
+              <FaShoppingCart /> Agregar al carrito
+            </button>
             <button className="pd-whatsapp-btn" onClick={handleWhatsApp}>
               <FaWhatsapp className="pd-wa-icon" />
               Pedir por WhatsApp
