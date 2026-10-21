@@ -59,9 +59,6 @@ export default function ShopPage() {
     getProducts();
   }, []);
 
-  const mostrarAlerta = () => {
-    alert('¡Producto registrado correctamente!');
-  };
 
   const filtered = useMemo(() => {
     let list = shopProducts.filter((product) => {
@@ -109,7 +106,7 @@ export default function ShopPage() {
       </div>
 
       <div className="shop-sidebar-block">
-        <h3 className="shop-sidebar-title">Price Range</h3>
+        <h3 className="shop-sidebar-title">Rango de precios</h3>
         <ul className="shop-price-list">
           {priceRanges.map((range) => (
             <li key={range.id}>
@@ -218,8 +215,8 @@ export default function ShopPage() {
                       <FaStar /> {product.rating}
                     </span>
                     <div className="shop-card-price">
-                      {product.oldPrice && <del>${product.oldPrice}</del>}
-                      <strong>${product.price}</strong>
+                      {product.oldPrice && <del>S/{product.oldPrice}</del>}
+                      <strong>S/{product.price}</strong>
                     </div>
                   </div>
                 </div>

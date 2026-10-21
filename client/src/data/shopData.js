@@ -1,7 +1,7 @@
 export const categories = [
   { id: 'all', label: 'All Products', count: 24 },
   { id: 'clothing', label: 'Clothing', count: 124 },
-  { id: 'accessories', label: 'Accessories', count: 86 },
+  { id: 'Hanna', label: 'Hanna', count: 86 },
   { id: 'footwear', label: 'Footwear', count: 52 },
   { id: 'bags', label: 'Bags', count: 38 },
   { id: 'acondicionador', label: 'Acondicionador', count: 64 },

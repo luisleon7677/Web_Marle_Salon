@@ -41,8 +41,8 @@ export default function SpecialPromo() {
     >
       <div className="container">
         <div style={{ maxWidth: 640, margin: '0 auto', textAlign: 'center' }}>
-          <h3 className="section-sub-title">Special Promo</h3>
-          <h3 className="section-title text-white mb-4">Summer Sale</h3>
+          <h3 className="section-sub-title">Promoción especial</h3>
+          <h3 className="section-title text-white mb-4">Promoción navideña</h3>
           <p className="mb-5 lead">
             Repudiandae nostrum natus excepturi fuga ullam accusantium vel ut
             eveniet aut consequatur laboriosam ipsam.

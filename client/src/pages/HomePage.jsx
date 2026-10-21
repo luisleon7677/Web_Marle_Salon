@@ -22,7 +22,7 @@ export default function HomePage() {
       <SpecialPromo />
       <Services />
       <Testimonials />
-      <Blog />
+      {/* <Blog /> */}
       <Contact />
     </>
   )

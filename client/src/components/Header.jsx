@@ -2,11 +2,11 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 
 const homeLinks = [
-  { href: '/#products-section', label: 'Productos' },
+  { href: '/#products-section', label: 'Destacados' },
   { href: '/#about-section', label: 'Nosotros' },
-  { href: '/#special-section', label: 'Servicios' },
+  { href: '/#services-section', label: 'Servicios' },
   { href: '/#testimonials-section', label: 'Testimonios' },
-  { href: '/#blog-section', label: 'Blog' },
+  // { href: '/#blog-section', label: 'Blog' },
   { href: '/#contact-section', label: 'Contacto' },
 ]
 

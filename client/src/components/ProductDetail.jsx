@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { FaStar, FaTimes, FaWhatsapp, FaTag, FaShieldAlt, FaTruck } from 'react-icons/fa'
 
-const WHATSAPP_NUMBER = '50212345678' // ← cambia este número al tuyo
+const WHATSAPP_NUMBER = '50900184348' // ← cambia este número al tuyo
 
 export default function ProductDetail({ product, onClose }) {
   // Cerrar con ESC
@@ -26,7 +26,7 @@ export default function ProductDetail({ product, onClose }) {
 
   const handleWhatsApp = () => {
     const message = encodeURIComponent(
-      `¡Hola! Estoy interesado/a en el producto:\n\n*${product.name}*\nCategoría: ${product.category}\nPrecio: $${product.price}${product.oldPrice ? ` (antes $${product.oldPrice})` : ''}\n\n¿Está disponible?`
+      `¡Hola! Estoy interesado/a en el producto:\n\n*${product.name}*\nCategoría: ${product.category}\nPrecio: S/.${product.price}${product.oldPrice ? ` (antes S/.${product.oldPrice})` : ''}\n\n¿Está disponible?`
     )
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank')
   }
@@ -78,9 +78,9 @@ export default function ProductDetail({ product, onClose }) {
             {/* Precio */}
             <div className="pd-price-block">
               {product.oldPrice && (
-                <del className="pd-old-price">${product.oldPrice}</del>
+                <del className="pd-old-price">S/.{product.oldPrice}</del>
               )}
-              <span className="pd-price">${product.price}</span>
+              <span className="pd-price">S/.{product.price}</span>
               {discount && (
                 <span className="pd-discount">
                   <FaTag /> {discount}% OFF

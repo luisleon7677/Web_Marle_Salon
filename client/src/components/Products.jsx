@@ -1,9 +1,9 @@
 import { FaStar, FaHeart } from 'react-icons/fa'
 
 const products = [
-  { id: 1, name:'Shampoo Liss Care', desc:'Limpia suavemente y prolonga el efecto del alisado, dejando tu cabello suave y brillante.', image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/acondicionador_liss_care.webp', wishlist: false },
-  { id: 2, name:'Acondicionador Liss Care',desc:'Hidrata y desenreda tu cabello, aportando suavidad y manejabilidad.',image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/shampoo_liss_care.webp', wishlist: true },
-  { id: 3, name:'Mascarilla Liss Care', desc:'Nutre profundamente y ayuda a mantener tu cabello sedoso, brillante y saludable.',image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/mascarilla_liss_care.webp', wishlist: false },
+  { id: 1, name: 'Shampoo Liss Care', desc: 'Limpia suavemente y prolonga el efecto del alisado, dejando tu cabello suave y brillante.', image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/acondicionador_liss_care.webp', wishlist: false },
+  { id: 2, name: 'Acondicionador Liss Care', desc: 'Hidrata y desenreda tu cabello, aportando suavidad y manejabilidad.', image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/shampoo_liss_care.webp', wishlist: true },
+  { id: 3, name: 'Mascarilla Liss Care', desc: 'Nutre profundamente y ayuda a mantener tu cabello sedoso, brillante y saludable.', image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/mascarilla_liss_care.webp', wishlist: false },
 
 ]
 
@@ -13,9 +13,9 @@ export default function Products() {
       <div className="container">
         <div className="products-intro">
           <h3 className="section-sub-title">Productos populares</h3>
-          <h2 className="section-title mb-3">Nuestros productos</h2>
+          <h2 className="section-title mb-3">Productos Destacados</h2>
           <p>
-          Descubre nuestros productos más populares, seleccionados para cuidar, nutrir y transformar tu cabello. Encuentra tus marcas favoritas y disfruta de un cabello más suave, brillante y saludable desde casa. 
+            Descubre nuestros productos más populares, seleccionados para cuidar, nutrir y transformar tu cabello. Encuentra tus marcas favoritas y disfruta de un cabello más suave, brillante y saludable desde casa.
           </p>
         </div>
 
