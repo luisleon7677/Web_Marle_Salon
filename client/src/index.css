@@ -1,6 +1,6 @@
 :root {
-  --primary: #004E8C;
-  --accent-green: #004E8C;
+  --primary: #20354B;
+  --accent-green: #4CE6B9;
   --black: #000;
   --text: gray;
   --muted: #adb5bd;
@@ -1710,6 +1710,36 @@ textarea.form-control {
 .shop-card-price strong {
   color: #000;
   font-size: 16px;
+}
+
+.shop-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  font-size: 14px;
+}
+
+.shop-pagination button {
+  padding: 0.65rem 1rem;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background: #000;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shop-pagination button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.shop-pagination button:focus-visible {
+  outline: 2px solid #000;
+  outline-offset: 3px;
 }
 
 .shop-empty {

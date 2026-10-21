@@ -1,19 +1,15 @@
 export const categories = [
-  { id: 'all', label: 'All Products', count: 24 },
-  { id: 'clothing', label: 'Clothing', count: 124 },
-  { id: 'Hanna', label: 'Hanna', count: 86 },
-  { id: 'footwear', label: 'Footwear', count: 52 },
-  { id: 'bags', label: 'Bags', count: 38 },
+  { id: 'all', label: 'Todas', count: 24 },
   { id: 'acondicionador', label: 'Acondicionador', count: 64 },
-  { id: 'shampoo', label: 'Champús', count: 28 },
+  { id: 'shampoo', label: 'Shampoos', count: 28 },
 ]
 
 export const priceRanges = [
-  { id: 'under-50', label: 'Under $50' },
-  { id: '50-100', label: '$50 - $100' },
-  { id: '100-200', label: '$100 - $200' },
-  { id: '200-500', label: '$200 - $500' },
-  { id: 'over-500', label: 'Over $500' },
+  { id: 'menor a 50', label: 'Menor a S/50' },
+  { id: '50 - 100', label: 'S/50 - S/100' },
+  { id: '100 - 200', label: 'S/100 - S/200' },
+  { id: '200 - 500', label: 'S/200 - S/500' },
+  { id: 'mayor a 500', label: 'Mayor a S/500' },
 ]
 
 export const shopProducts = [

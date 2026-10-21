@@ -4,28 +4,35 @@ import { FaStar, FaHeart, FaChevronDown, FaSlidersH, FaTimes, FaEye } from 'reac
 import { categories, priceRanges } from '../data/shopData'
 import ProductDetail from '../components/ProductDetail'
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const PRODUCTS_PER_PAGE = 9
 
+function getProductLine(product) {
+  const line = typeof product.line === 'string' ? product.line.trim() : ''
+  return line || (typeof product.badge?.line === 'string' ? product.badge.line.trim() : '')
+}
 
 
 function matchesPrice(product, selectedPrices) {
   if (selectedPrices.length === 0) return true
   return selectedPrices.some((range) => {
-    if (range === 'under-50') return product.price < 50
-    if (range === '50-100') return product.price >= 50 && product.price <= 100
-    if (range === '100-200') return product.price > 100 && product.price <= 200
-    if (range === '200-500') return product.price > 200 && product.price <= 500
-    if (range === 'over-500') return product.price > 500
+    if (range === 'menor a 50') return product.price < 50
+    if (range === '50 - 100') return product.price >= 50 && product.price <= 100
+    if (range === '100 - 200') return product.price > 100 && product.price <= 200
+    if (range === '200 - 500') return product.price > 200 && product.price <= 500
+    if (range === 'mayor a 500') return product.price > 500
     return true
   })
 }
 
 export default function ShopPage() {
   const [category, setCategory] = useState('all')
+  const [selectedLine, setSelectedLine] = useState('')
   const [selectedPrices, setSelectedPrices] = useState([])
   const [sortBy, setSortBy] = useState('featured')
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [shopProducts, setShopProducts] = useState([])
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [page, setPage] = useState(1)
 
   //carga de productos
   useEffect(() => {
@@ -60,11 +67,21 @@ export default function ShopPage() {
   }, []);
 
 
+  const lines = useMemo(() => {
+    const counts = new Map()
+    shopProducts.forEach((product) => {
+      const line = getProductLine(product)
+      if (line) counts.set(line, (counts.get(line) || 0) + 1)
+    })
+    return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b, 'es'))
+  }, [shopProducts])
+
   const filtered = useMemo(() => {
     let list = shopProducts.filter((product) => {
       const catOk = category === 'all' || product.category === category
       const priceOk = matchesPrice(product, selectedPrices)
-      return catOk && priceOk
+      const lineOk = selectedLine === '' || getProductLine(product) === selectedLine
+      return catOk && priceOk && lineOk
     })
 
     if (sortBy === 'price-asc') list = [...list].sort((a, b) => a.price - b.price)
@@ -72,11 +89,16 @@ export default function ShopPage() {
     if (sortBy === 'name') list = [...list].sort((a, b) => a.name.localeCompare(b.name))
 
     return list
-  }, [shopProducts, category, selectedPrices, sortBy])
+  }, [shopProducts, category, selectedPrices, sortBy, selectedLine])
 
   const activeCategory = categories.find((c) => c.id === category)
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PRODUCTS_PER_PAGE))
+  const currentPage = Math.min(page, totalPages)
+  const pageStart = (currentPage - 1) * PRODUCTS_PER_PAGE
+  const visibleProducts = filtered.slice(pageStart, pageStart + PRODUCTS_PER_PAGE)
 
   const togglePrice = (id) => {
+    setPage(1)
     setSelectedPrices((prev) =>
       prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id]
     )
@@ -94,11 +116,35 @@ export default function ShopPage() {
                 className={category === cat.id ? 'active' : ''}
                 onClick={() => {
                   setCategory(cat.id)
+                  setPage(1)
                   setFiltersOpen(false)
                 }}
               >
                 <span>{cat.label}</span>
                 <span className="count">({cat.count})</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="shop-sidebar-block">
+        <h3 className="shop-sidebar-title">Líneas</h3>
+        <ul className="shop-categories">
+          {[[ '', shopProducts.length ], ...lines].map(([line, count]) => (
+            <li key={line}>
+              <button
+                type="button"
+                className={selectedLine === line ? 'active' : ''}
+                aria-pressed={selectedLine === line}
+                onClick={() => {
+                  setSelectedLine(line)
+                  setPage(1)
+                  setFiltersOpen(false)
+                }}
+              >
+                <span>{line || 'Todas las líneas'}</span>
+                <span className="count">({count})</span>
               </button>
             </li>
           ))}
@@ -162,7 +208,10 @@ export default function ShopPage() {
                   <select
                     id="sort-by"
                     value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
+                    onChange={(e) => {
+                      setSortBy(e.target.value)
+                      setPage(1)
+                    }}
                   >
                     <option value="featured">Featured</option>
                     <option value="price-asc">Price: Low to High</option>
@@ -176,7 +225,7 @@ export default function ShopPage() {
           </div>
 
           <div className="shop-grid">
-            {filtered.map((product) => (
+            {visibleProducts.map((product) => (
               <article
                 className="shop-card"
                 key={product.id}
@@ -223,6 +272,28 @@ export default function ShopPage() {
               </article>
             ))}
           </div>
+
+          {totalPages > 1 && (
+            <nav className="shop-pagination" aria-label="Paginación de productos">
+              <button
+                type="button"
+                disabled={currentPage === 1}
+                onClick={() => setPage(currentPage - 1)}
+              >
+                Anterior
+              </button>
+              <span aria-live="polite" aria-atomic="true">
+                Página {currentPage} de {totalPages}
+              </span>
+              <button
+                type="button"
+                disabled={currentPage === totalPages}
+                onClick={() => setPage(currentPage + 1)}
+              >
+                Siguiente
+              </button>
+            </nav>
+          )}
 
           {filtered.length === 0 && (
             <p className="shop-empty">No products match your filters.</p>
