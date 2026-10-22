@@ -1,62 +1,50 @@
+﻿import { FaWhatsapp } from 'react-icons/fa'
+
+const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER || '50900184348').replace(/\D/g, '')
+
 export default function Contact() {
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const field = event.currentTarget.elements.consulta
+    const consultation = field.value.trim()
+    if (!consultation) {
+      field.setCustomValidity('Escribe tu consulta para continuar.')
+      field.reportValidity()
+      return
+    }
+    const message = `¡Hola, Marle Salón! Tengo esta consulta:\n\n${consultation}`
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')
   }
 
   return (
     <section className="site-section bg-light" id="contact-section">
       <div className="container">
         <div className="section-header">
-          <h3 className="section-sub-title">Formulario de Contacto</h3>
+          <h3 className="section-sub-title">Consultas por WhatsApp</h3>
           <h2 className="section-title mb-3">Ponte en contacto</h2>
         </div>
-
         <div className="contact-form-wrap">
           <form className="contact-form" onSubmit={handleSubmit}>
-            <h2 className="h4 text-black mb-5" style={{ fontSize: '1.5rem', fontWeight: 700 }}>
-              Formulario de contacto
+            <h2 className="h4 text-black mb-3" style={{ fontSize: '1.5rem', fontWeight: 700 }}>
+              Escríbenos por WhatsApp
             </h2>
-
-            <div className="form-row two-cols">
-              <div className="form-group">
-                <label htmlFor="fname">Nombres</label>
-                <input type="text" id="fname" className="form-control rounded-0" />
-              </div>
-              <div className="form-group">
-                <label htmlFor="lname">Apellidos</label>
-                <input type="text" id="lname" className="form-control rounded-0" />
-              </div>
-            </div>
-
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" className="form-control rounded-0" />
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="subject">Asunto</label>
-                <input type="text" id="subject" className="form-control rounded-0" />
-              </div>
-            </div>
-
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="message">Mensaje</label>
+                <label htmlFor="contact-consultation">Consulta</label>
                 <textarea
-                  id="message"
-                  cols="30"
-                  rows="7"
+                  id="contact-consultation"
+                  name="consulta"
+                  rows="5"
+                  required
                   className="form-control rounded-0"
-                  placeholder="Escribe tus notas o preguntas aquí..."
+                  placeholder="Escribe tu consulta sobre nuestros productos o servicios..."
+                  onInput={(event) => event.currentTarget.setCustomValidity('')}
                 />
               </div>
             </div>
-
             <button type="submit" className="btn btn-black rounded-0" style={{ padding: '14px 24px' }}>
-              Enviar mensaje
+              <FaWhatsapp aria-hidden="true" style={{ marginRight: 8, verticalAlign: 'middle' }} />
+              Enviar a WhatsApp
             </button>
           </form>
         </div>

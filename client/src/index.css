@@ -2081,15 +2081,47 @@ textarea.form-control {
 }
 
 /* Carrito */
-.cart-launcher {
+.floating-shop-actions {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: max(20px, env(safe-area-inset-bottom));
   z-index: 2200;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 14px 20px;
+  gap: 12px;
+}
+.whatsapp-launcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+  font-size: 30px;
+  box-shadow: 0 4px 18px #0003;
+  transition: background 0.2s, transform 0.2s;
+}
+.whatsapp-launcher:hover {
+  background: #128c7e;
+  color: #fff;
+  transform: translateY(-2px);
+}
+.whatsapp-launcher:focus-visible {
+  outline: 3px solid #128c7e;
+  outline-offset: 4px;
+}
+.cart-launcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  padding: 0;
   border: 0;
   border-radius: 30px;
   background: var(--primary);
@@ -2097,10 +2129,28 @@ textarea.form-control {
   box-shadow: 0 4px 18px #0003;
   cursor: pointer;
   font: inherit;
+  font-size: 24px;
+}
+.cart-launcher-count {
+  position: absolute;
+  top: -4px;
+  right: -5px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #fff;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 6px #0002;
 }
 .cart-notice:not(:empty) {
   position: fixed;
-  bottom: 85px;
+  bottom: calc(max(20px, env(safe-area-inset-bottom)) + 140px);
   right: 20px;
   max-width: min(360px, calc(100vw - 40px));
   z-index: 4000;

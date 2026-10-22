@@ -16,7 +16,7 @@ export default function Hero() {
             <Link to="/shop" className="btn btn-outline-white rounded-0">
               Ver productos
             </Link>
-            <a href="#special-section" className="btn btn-white rounded-0">
+            <a href="#services-section" className="btn btn-white rounded-0">
               Ver servicios
             </a>
           </div>

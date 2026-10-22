@@ -76,9 +76,22 @@ export default function CartProvider({ children }) {
   return (
     <CartContext.Provider value={{ addItem }}>
       {children}
+      <div className="floating-shop-actions">
+      <a
+        className="whatsapp-launcher"
+        href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('¡Hola, Marle Salón! Quisiera hacer una consulta sobre sus productos y servicios.')}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Consultar por WhatsApp"
+        title="Consultar por WhatsApp"
+      >
+        <FaWhatsapp aria-hidden="true" />
+      </a>
       <button type="button" className="cart-launcher" onClick={() => dialog.current.showModal()} aria-label={`Abrir carrito, ${count} productos`}>
-        <FaShoppingCart /> Carrito ({count})
+        <FaShoppingCart aria-hidden="true" />
+        <span className="cart-launcher-count" aria-hidden="true">{count}</span>
       </button>
+      </div>
       <div className="cart-notice" role="status">{notice}</div>
       <dialog ref={dialog} className="cart-dialog" aria-labelledby="cart-title" onClick={(event) => {
         if (event.target === event.currentTarget) dialog.current.close()

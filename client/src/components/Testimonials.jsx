@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 const testimonials = [
-  { name: 'Sara Herrera', image: '/images/person_3.jpg' , test:'Estoy encantada con los resultados de Marle Salon. Mi cabello quedó suave, brillante y hermoso. La atención fue excelente y los productos que utilizan son increíbles. ¡Lo recomiendo totalmente!'},
-  { name: 'Melissa  Aguilar', image: '/images/person_2.jpg' , test:'Me encantó mi cambio de look. El balayage quedó precioso, con tonos naturales que iluminan mi cabello. Cuidaron cada detalle y el resultado superó mis expectativas.'},
-  { name: 'Sofia Puma', image: '/images/person_4.jpg' , test:'Los productos capilares de Marle Salon se han convertido en mis favoritos. Mi cabello luce más hidratado, suave y brillante. Me encanta poder cuidarlo también en casa.'},
+  { name: 'Sara Herrera', image: '/images/testimonial-woman-1.jpg' , test:'Estoy encantada con los resultados de Marle Salon. Mi cabello quedó suave, brillante y hermoso. La atención fue excelente y los productos que utilizan son increíbles. ¡Lo recomiendo totalmente!'},
+  { name: 'Melissa  Aguilar', image: '/images/testimonial-woman-2.jpg' , test:'Me encantó mi cambio de look. El balayage quedó precioso, con tonos naturales que iluminan mi cabello. Cuidaron cada detalle y el resultado superó mis expectativas.'},
+  { name: 'Sofia Puma', image: '/images/testimonial-woman-3.jpg' , test:'Los productos capilares de Marle Salon se han convertido en mis favoritos. Mi cabello luce más hidratado, suave y brillante. Me encanta poder cuidarlo también en casa.'},
   { name: 'Adelis Contreras', image: '/images/person_1.jpg' , test:'Mi experiencia fue excelente. Me realicé un alisado y quedé feliz con el resultado. Mi cabello luce hermoso y es mucho más fácil de peinar. ¡Volveré pronto!'},
 ]
 
