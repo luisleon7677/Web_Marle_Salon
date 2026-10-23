@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 export default function Hero() {
   return (
     <section
-      className="site-blocks-cover overlay"
+      className="site-blocks-cover home-hero overlay"
       style={{ backgroundImage: 'url(/images/hero_2.jpg)' }}
     >
       <div className="container">

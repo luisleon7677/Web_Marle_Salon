@@ -558,6 +558,18 @@ textarea.form-control {
   padding: 14px 32px;
 }
 
+@media (max-width: 767.98px) {
+  .home-hero {
+    height: auto;
+    min-height: clamp(460px, 68svh, 560px);
+    padding: 3rem 0;
+  }
+
+  .home-hero .hero-content .mb-5 {
+    margin-bottom: 1.5rem !important;
+  }
+}
+
 /* Products grid */
 .products-intro {
   text-align: center;
