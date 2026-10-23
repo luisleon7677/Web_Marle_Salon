@@ -1,4 +1,5 @@
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaPhone, FaEnvelope } from 'react-icons/fa'
+import { FaFacebookF, FaInstagram, FaTiktok, FaPhone, FaEnvelope } from 'react-icons/fa'
+import { EMAIL, PHONE_DISPLAY, SOCIAL_LINKS, WHATSAPP_NUMBER } from '../data/contact'
 
 export default function TopBar() {
   return (
@@ -6,22 +7,21 @@ export default function TopBar() {
       <div className="container">
         <div className="row">
           <ul className="social-media">
-            <li><a href="#" aria-label="Facebook"><FaFacebookF /></a></li>
-            <li><a href="#" aria-label="Twitter"><FaTwitter /></a></li>
-            <li><a href="#" aria-label="Instagram"><FaInstagram /></a></li>
-            <li><a href="#" aria-label="LinkedIn"><FaLinkedinIn /></a></li>
+            <li><a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a></li>
+            <li><a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok"><FaTiktok /></a></li>
+            <li><a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a></li>
           </ul>
           <p className="top-bar-contact mb-0">
             <span className="mr-3">
-              <a href="tel:+123456789101">
+              <a href={`tel:+${WHATSAPP_NUMBER}`}>
                 <FaPhone className="mr-2" style={{ position: 'relative', top: 2 }} />
-                <span className="contact-text">(+1) 234 5678 9101</span>
+                <span className="contact-text">{PHONE_DISPLAY}</span>
               </a>
             </span>
             <span>
-              <a href="mailto:shop@yourdomain.com">
+              <a href={`mailto:${EMAIL}`}>
                 <FaEnvelope className="mr-2" style={{ position: 'relative', top: 2 }} />
-                <span className="contact-text">shop@yourdomain.com</span>
+                <span className="contact-text">{EMAIL}</span>
               </a>
             </span>
           </p>

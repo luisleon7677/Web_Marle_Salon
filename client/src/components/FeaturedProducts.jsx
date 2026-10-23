@@ -1,5 +1,10 @@
+import { useCart } from './CartProvider'
+import { WHATSAPP_NUMBER } from '../data/contact'
+
 const featured = [
   {
+    id: 'featured-shampoo-liss-care',
+    name: 'Shampoo Liss Care',
     number: '01.',
     image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/shampoo_liss_care.webp',
     reverse: false,
@@ -10,6 +15,8 @@ const featured = [
 
   },
   {
+    id: 'featured-acondicionador-liss-care',
+    name: 'Acondicionador Liss Care',
     number: '02.',
     image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/acondicionador_liss_care.webp',
     reverse: true,
@@ -21,6 +28,7 @@ const featured = [
 ]
 
 export default function FeaturedProducts() {
+  const { addItem } = useCart()
   return (
     <section className="site-section bg-light">
       <div className="container">
@@ -36,7 +44,7 @@ export default function FeaturedProducts() {
           <div className="featured-card" key={item.number}>
             <div className={`product-item-2 ${item.reverse ? 'reverse' : ''}`}>
               <div className="product-media">
-                <img src={item.image} alt="Featured product" />
+                <img src={item.image} alt={item.name} />
               </div>
               <div className="product-title-wrap">
                 <span className="number">{item.number}</span>
@@ -56,12 +64,17 @@ export default function FeaturedProducts() {
                   </div>
                 </div>
                 <div className="featured-actions">
-                  <a href="#" className="btn btn-outline-black rounded-0">
-                    Ver detalles
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`¡Hola! Quiero comprar ${item.name}. ¿Está disponible?`)}`}
+                    className="btn btn-outline-black rounded-0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Comprar
                   </a>
-                  <a href="#" className="btn btn-black rounded-0">
+                  <button type="button" className="btn btn-black rounded-0" onClick={() => addItem(item)}>
                     Añadir al carrito
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

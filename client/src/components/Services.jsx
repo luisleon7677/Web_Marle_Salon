@@ -24,7 +24,7 @@ const services = [
   { title: 'Morena iluminada', icon: MdFace2, dsc: 'Realza la belleza de tu cabello oscuro con delicados reflejos en tonos cálidos que aportan luz, profundidad y un acabado sofisticado y natural.' },
 ]
 
-const WHATSAPP_NUMBER = '50900184348'
+import { WHATSAPP_NUMBER } from '../data/contact'
 
 export default function Services() {
 

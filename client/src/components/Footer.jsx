@@ -2,11 +2,12 @@ import { Link } from 'react-router-dom'
 import {
   FaFacebookF,
   FaInstagram,
+  FaTiktok,
   FaWhatsapp,
   FaPhoneAlt,
   FaEnvelope,
-  FaMapMarkerAlt,
 } from 'react-icons/fa'
+import { EMAIL, PHONE_DISPLAY, SOCIAL_LINKS, WHATSAPP_NUMBER } from '../data/contact'
 
 export default function Footer() {
   const year = new Date().getFullYear()
@@ -29,9 +30,10 @@ export default function Footer() {
               Vive la experiencia Marle.
             </p>
             <div className="footer-socials">
-              <a href="#" aria-label="Facebook" className="footer-social-btn"><FaFacebookF /></a>
-              <a href="#" aria-label="Instagram" className="footer-social-btn"><FaInstagram /></a>
-              <a href="#" aria-label="WhatsApp" className="footer-social-btn"><FaWhatsapp /></a>
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="footer-social-btn"><FaFacebookF /></a>
+              <a href={SOCIAL_LINKS.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="footer-social-btn"><FaTiktok /></a>
+              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="footer-social-btn"><FaInstagram /></a>
+              <a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="footer-social-btn"><FaWhatsapp /></a>
             </div>
           </div>
 
@@ -64,16 +66,12 @@ export default function Footer() {
             <h4 className="footer-col-title">Contacto</h4>
             <ul className="footer-contact-list">
               <li>
-                <FaMapMarkerAlt className="fc-icon" />
-                <span>Ciudad de Guatemala, GT</span>
-              </li>
-              <li>
                 <FaPhoneAlt className="fc-icon" />
-                <a href="tel:+50212345678">+502 1234-5678</a>
+                <a href={`tel:+${WHATSAPP_NUMBER}`}>{PHONE_DISPLAY}</a>
               </li>
               <li>
                 <FaEnvelope className="fc-icon" />
-                <a href="mailto:hola@marlesalon.com">hola@marlesalon.com</a>
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
               </li>
             </ul>
           </div>
@@ -86,7 +84,8 @@ export default function Footer() {
         <div className="container footer-bottom-inner">
           <p>© {year} Marle Salón Studio. Todos los derechos reservados.</p>
           <p className="footer-bottom-right">
-            Diseñado con <span className="footer-heart">♥</span> en Guatemala
+            Hecho con <span className="footer-heart" aria-label="amor" role="img">♥</span> por{' '}
+            <a href="https://luisleon.online/" target="_blank" rel="noopener noreferrer">Luis León</a>
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 ﻿import { FaWhatsapp } from 'react-icons/fa'
 
-const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER || '50900184348').replace(/\D/g, '')
+import { WHATSAPP_NUMBER } from '../data/contact'
 
 export default function Contact() {
   const handleSubmit = (event) => {

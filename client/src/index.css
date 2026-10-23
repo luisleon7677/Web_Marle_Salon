@@ -486,7 +486,8 @@ textarea.form-control {
   color: #212529;
 }
 
-.site-nav-wrap li a:hover {
+.site-nav-wrap li a:hover,
+.site-nav-wrap li a.active {
   color: var(--primary);
 }
 
@@ -832,6 +833,33 @@ textarea.form-control {
   color: #fff;
   text-transform: uppercase;
   font-size: 0.85rem;
+}
+
+.about-video-dialog {
+  width: min(900px, calc(100% - 2rem));
+  max-width: none;
+  max-height: calc(100% - 2rem);
+  padding: 0;
+  border: 0;
+  background: #000;
+  overflow: visible;
+}
+
+.about-video-dialog::backdrop { background: rgb(0 0 0 / .8); }
+.about-video-dialog video { display: block; width: 100%; max-height: calc(100vh - 2rem); }
+.about-video-close {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  z-index: 1;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(0 0 0 / .75);
+  color: #fff;
+  font-size: 1.75rem;
+  cursor: pointer;
 }
 
 /* Team */
@@ -1317,6 +1345,18 @@ textarea.form-control {
   color: #555 !important;
 }
 
+.footer-bottom-right a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.footer-bottom-right a:hover,
+.footer-bottom-right a:focus-visible {
+  color: var(--primary);
+}
+
 .footer-heart {
   color: #e63946;
 }
@@ -1399,36 +1439,65 @@ textarea.form-control {
   gap: 0.35rem;
 }
 
-.shop-categories button {
+.shop-choice {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background: none;
-  border: none;
+  gap: 0.65rem;
   padding: 0.55rem 0.75rem;
   font-family: var(--font);
   font-size: 14px;
   color: #666;
   cursor: pointer;
   text-align: left;
-  border-radius: 0;
   transition: 0.2s;
 }
 
-.shop-categories button .count {
+.shop-choice input {
+  appearance: none;
+  flex: none;
+  width: 17px;
+  height: 17px;
+  margin: 0;
+  border: 1.5px solid #aaa;
+  border-radius: 2px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.shop-choice input:checked {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.shop-choice input:checked::after {
+  content: '';
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid white;
+  border-bottom: 2px solid white;
+  transform: rotate(-45deg) translateY(-1px);
+}
+
+.shop-choice input:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+.shop-choice .count {
+  margin-left: auto;
   color: #adb5bd;
   font-size: 13px;
 }
 
-.shop-categories button:hover {
+.shop-choice:hover {
   color: var(--primary);
 }
 
-.shop-categories button.active {
+.shop-choice:has(input:checked) {
   color: var(--primary);
   font-weight: 700;
-  background: rgba(241, 104, 33, 0.08);
 }
 
 .shop-price-list {

@@ -3,7 +3,7 @@ import { FaShoppingCart, FaTimes, FaWhatsapp } from 'react-icons/fa'
 
 const CartContext = createContext(null)
 const STORAGE_KEY = 'marle-cart'
-const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER || '50900184348').replace(/\D/g, '')
+import { WHATSAPP_NUMBER } from '../data/contact'
 const money = (value) => `S/ ${value.toFixed(2)}`
 
 function readCart() {

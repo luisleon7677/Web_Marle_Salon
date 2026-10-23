@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import TopBar from './TopBar'
 import Header from './Header'
 import Footer from './Footer'
+import { homeLinks } from '../data/navigation'
 
 export default function Layout() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [sticky, setSticky] = useState(false)
+  const location = useLocation()
+  const isShop = location.pathname.startsWith('/shop')
 
   useEffect(() => {
     const onScroll = () => setSticky(window.scrollY > 80)
@@ -42,14 +45,11 @@ export default function Layout() {
           </button>
         </div>
         <ul className="site-nav-wrap">
-          <li><Link to="/" onClick={closeMenu}>Inicio</Link></li>
-          <li><Link to="/shop" onClick={closeMenu}>Tienda</Link></li>
-          <li><a href="/#products-section" onClick={closeMenu}>Productos</a></li>
-          <li><a href="/#about-section" onClick={closeMenu}>Nosotros</a></li>
-          <li><a href="/#special-section" onClick={closeMenu}>Servicios</a></li>
-          <li><a href="/#testimonials-section" onClick={closeMenu}>Testimonios</a></li>
-          <li><a href="/#blog-section" onClick={closeMenu}>Blog</a></li>
-          <li><a href="/#contact-section" onClick={closeMenu}>Contacto</a></li>
+          <li><NavLink to="/" end onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>Inicio</NavLink></li>
+          <li><NavLink to="/shop" onClick={closeMenu} className={({ isActive }) => isActive ? 'active' : ''}>Tienda</NavLink></li>
+          {!isShop && homeLinks.map((link) => (
+            <li key={link.href}><a href={link.href} onClick={closeMenu}>{link.label}</a></li>
+          ))}
         </ul>
       </aside>
 

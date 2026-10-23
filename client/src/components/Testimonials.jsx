@@ -8,9 +8,6 @@ const testimonials = [
   { name: 'Adelis Contreras', image: '/images/person_1.jpg' , test:'Mi experiencia fue excelente. Me realicé un alisado y quedé feliz con el resultado. Mi cabello luce hermoso y es mucho más fácil de peinar. ¡Volveré pronto!'},
 ]
 
-const quote =
-  'Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.'
-
 export default function Testimonials() {
   const [index, setIndex] = useState(0)
   const current = testimonials[index]

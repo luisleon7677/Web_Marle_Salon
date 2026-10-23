@@ -1,6 +1,14 @@
+import { useState } from 'react'
+import { WHATSAPP_NUMBER } from '../data/contact'
+
 export default function Newsletter() {
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const [phone, setPhone] = useState('')
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const number = phone.trim()
+    const message = `¡Hola, Marle Store! Mi número de WhatsApp es ${number}. Quiero que me agreguen al grupo de promociones especiales y lives en vivo.`
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -13,22 +21,26 @@ export default function Newsletter() {
     >
       <div className="container">
         <form className="newsletter-form" onSubmit={handleSubmit}>
-          <h2>¿Quieres al por mayor?</h2>
+          <h2>Únete a nuestro grupo de WhatsApp</h2>
           <div className="newsletter-row">
             <input
-              type="email"
+              type="tel"
+              inputMode="tel"
+              pattern="[+]?[0-9 ]{9,18}"
+              title="Ingresa entre 9 y 18 dígitos; puedes incluir el código de país."
               className="form-control rounded-0"
-              placeholder="Enter your email address"
+              placeholder="Ingresa tu número de WhatsApp"
+              aria-label="Número de WhatsApp"
+              autoComplete="tel"
+              value={phone}
+              onChange={(event) => setPhone(event.target.value)}
               required
             />
             <button type="submit" className="btn btn-outline-white rounded-0">
-              Subscribe
+              Enviar por WhatsApp
             </button>
           </div>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat
-            commodi veniam doloremque ducimus tempora.
-          </p>
+          <p>Déjanos tu número para agregarte al grupo de promociones especiales y lives en vivo.</p>
         </form>
       </div>
     </section>

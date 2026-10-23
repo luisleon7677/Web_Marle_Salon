@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { FaStar, FaShoppingCart, FaChevronDown, FaSlidersH, FaTimes, FaEye } from 'react-icons/fa'
 import { useCart } from '../components/CartProvider'
-import { categories, priceRanges } from '../data/shopData'
+import { priceRanges } from '../data/shopData'
 import ProductDetail from '../components/ProductDetail'
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 const PRODUCTS_PER_PAGE = 9
@@ -33,6 +33,7 @@ export default function ShopPage() {
   const [sortBy, setSortBy] = useState('featured')
   const [filtersOpen, setFiltersOpen] = useState(false)
   const [shopProducts, setShopProducts] = useState([])
+  const [shopCategories, setShopCategories] = useState([])
   const [selectedProduct, setSelectedProduct] = useState(null)
   const [page, setPage] = useState(1)
 
@@ -40,13 +41,14 @@ export default function ShopPage() {
   useEffect(() => {
     async function getProducts() {
       try {
-        const response = await fetch(`${API_URL}/products`);
-
-        if (!response.ok) {
-          throw new Error(`Error HTTP: ${response.status}`);
+        const [productResponse, categoryResponse] = await Promise.all([
+          fetch(`${API_URL}/products`), fetch(`${API_URL}/categories`),
+        ]);
+        if (!productResponse.ok || !categoryResponse.ok) {
+          throw new Error(`Error HTTP: ${!productResponse.ok ? productResponse.status : categoryResponse.status}`);
         }
-
-        const data = await response.json();
+        const [data, categoryData] = await Promise.all([productResponse.json(), categoryResponse.json()]);
+        setShopCategories(categoryData.categories.filter((item) => !['all', 'todos'].includes(item.id)));
 
         console.log('Respuesta completa del backend:', data);
 
@@ -78,6 +80,16 @@ export default function ShopPage() {
     return [...counts.entries()].sort(([a], [b]) => a.localeCompare(b, 'es'))
   }, [shopProducts])
 
+  const categoryOptions = useMemo(() => {
+    const counts = new Map()
+    shopProducts.forEach((product) => {
+      if (product.category) counts.set(product.category, (counts.get(product.category) || 0) + 1)
+    })
+    return [{ id: 'all', label: 'Todas', count: shopProducts.length }, ...shopCategories.map((item) => ({
+      id: item.id, label: item.label, count: counts.get(item.id) || 0,
+    }))]
+  }, [shopProducts, shopCategories])
+
   const filtered = useMemo(() => {
     let list = shopProducts.filter((product) => {
       const catOk = category === 'all' || product.category === category
@@ -93,7 +105,7 @@ export default function ShopPage() {
     return list
   }, [shopProducts, category, selectedPrices, sortBy, selectedLine])
 
-  const activeCategory = categories.find((c) => c.id === category)
+  const activeCategory = categoryOptions.find((c) => c.id === category)
   const totalPages = Math.max(1, Math.ceil(filtered.length / PRODUCTS_PER_PAGE))
   const currentPage = Math.min(page, totalPages)
   const pageStart = (currentPage - 1) * PRODUCTS_PER_PAGE
@@ -109,22 +121,23 @@ export default function ShopPage() {
   const Sidebar = (
     <aside className="shop-sidebar">
       <div className="shop-sidebar-block">
-        <h3 className="shop-sidebar-title">Categories</h3>
+        <h3 className="shop-sidebar-title">Categorías</h3>
         <ul className="shop-categories">
-          {categories.map((cat) => (
+          {categoryOptions.map((cat) => (
             <li key={cat.id}>
-              <button
-                type="button"
-                className={category === cat.id ? 'active' : ''}
-                onClick={() => {
-                  setCategory(cat.id)
-                  setPage(1)
-                  setFiltersOpen(false)
-                }}
-              >
+              <label className="shop-choice">
+                <input
+                  type="checkbox"
+                  checked={category === cat.id}
+                  onChange={() => {
+                    setCategory(cat.id)
+                    setPage(1)
+                    setFiltersOpen(false)
+                  }}
+                />
                 <span>{cat.label}</span>
                 <span className="count">({cat.count})</span>
-              </button>
+              </label>
             </li>
           ))}
         </ul>
@@ -135,19 +148,19 @@ export default function ShopPage() {
         <ul className="shop-categories">
           {[[ '', shopProducts.length ], ...lines].map(([line, count]) => (
             <li key={line}>
-              <button
-                type="button"
-                className={selectedLine === line ? 'active' : ''}
-                aria-pressed={selectedLine === line}
-                onClick={() => {
-                  setSelectedLine(line)
-                  setPage(1)
-                  setFiltersOpen(false)
-                }}
-              >
+              <label className="shop-choice">
+                <input
+                  type="checkbox"
+                  checked={selectedLine === line}
+                  onChange={() => {
+                    setSelectedLine(line)
+                    setPage(1)
+                    setFiltersOpen(false)
+                  }}
+                />
                 <span>{line || 'Todas las líneas'}</span>
                 <span className="count">({count})</span>
-              </button>
+              </label>
             </li>
           ))}
         </ul>
@@ -178,9 +191,9 @@ export default function ShopPage() {
       <div className="shop-breadcrumbs">
         <div className="container">
           <nav aria-label="Breadcrumb">
-            <Link to="/">Home</Link>
+            <Link to="/">Inicio</Link>
             <span className="sep">›</span>
-            <span>Products</span>
+            <span>Productos</span>
           </nav>
         </div>
       </div>
@@ -191,8 +204,8 @@ export default function ShopPage() {
         <div className="shop-main">
           <div className="shop-toolbar">
             <div>
-              <h1 className="shop-title">{activeCategory?.label || 'All Products'}</h1>
-              <p className="shop-count">{filtered.length} products</p>
+              <h1 className="shop-title">{category === 'all' ? 'Todos los productos' : activeCategory?.label || 'Productos'}</h1>
+              <p className="shop-count">{filtered.length} {filtered.length === 1 ? 'producto' : 'productos'}</p>
             </div>
 
             <div className="shop-toolbar-actions">
@@ -201,11 +214,11 @@ export default function ShopPage() {
                 className="shop-filter-toggle"
                 onClick={() => setFiltersOpen(true)}
               >
-                <FaSlidersH /> Filters
+                <FaSlidersH /> Filtros
               </button>
 
               <div className="shop-sort">
-                <label htmlFor="sort-by">Sort by:</label>
+                <label htmlFor="sort-by">Ordenar por:</label>
                 <div className="shop-sort-select">
                   <select
                     id="sort-by"
@@ -215,10 +228,10 @@ export default function ShopPage() {
                       setPage(1)
                     }}
                   >
-                    <option value="featured">Featured</option>
-                    <option value="price-asc">Price: Low to High</option>
-                    <option value="price-desc">Price: High to Low</option>
-                    <option value="name">Name</option>
+                    <option value="featured">Destacados</option>
+                    <option value="price-asc">Precio: de menor a mayor</option>
+                    <option value="price-desc">Precio: de mayor a menor</option>
+                    <option value="name">Nombre</option>
                   </select>
                   <FaChevronDown className="shop-sort-icon" />
                 </div>
@@ -235,7 +248,7 @@ export default function ShopPage() {
                 style={{ cursor: 'pointer' }}
               >
                 <div className="shop-card-media">
-                  {product.badge && (
+                  {product.badge?.label && (
                     <span className={`shop-badge shop-badge--${product.badge.type}`}>
                       {product.badge.label}
                     </span>
@@ -299,7 +312,7 @@ export default function ShopPage() {
           )}
 
           {filtered.length === 0 && (
-            <p className="shop-empty">No products match your filters.</p>
+            <p className="shop-empty">No hay productos que coincidan con los filtros.</p>
           )}
         </div>
       </div>
@@ -310,8 +323,8 @@ export default function ShopPage() {
       />
       <div className={`shop-filters-drawer ${filtersOpen ? 'open' : ''}`}>
         <div className="shop-filters-drawer-header">
-          <h3>Filters</h3>
-          <button type="button" onClick={() => setFiltersOpen(false)} aria-label="Close">
+          <h3>Filtros</h3>
+          <button type="button" onClick={() => setFiltersOpen(false)} aria-label="Cerrar filtros">
             <FaTimes />
           </button>
         </div>

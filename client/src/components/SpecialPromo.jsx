@@ -20,10 +20,10 @@ export default function SpecialPromo() {
   }, [target])
 
   const blocks = [
-    { label: timeLeft.days, text: 'Days' },
-    { label: timeLeft.hours, text: 'Hours' },
-    { label: timeLeft.minutes, text: 'Min' },
-    { label: timeLeft.seconds, text: 'Sec' },
+    { label: timeLeft.days, text: 'Días' },
+    { label: timeLeft.hours, text: 'Horas' },
+    { label: timeLeft.minutes, text: 'Minutos' },
+    { label: timeLeft.seconds, text: 'Segundos' },
   ]
 
   return (
@@ -44,8 +44,7 @@ export default function SpecialPromo() {
           <h3 className="section-sub-title">Promoción especial</h3>
           <h3 className="section-title text-white mb-4">Promoción navideña</h3>
           <p className="mb-5 lead">
-            Repudiandae nostrum natus excepturi fuga ullam accusantium vel ut
-            eveniet aut consequatur laboriosam ipsam.
+            Descubre nuestras ofertas especiales y encuentra el cuidado ideal para tu cabello.
           </p>
 
           <div className="countdown">
@@ -59,7 +58,7 @@ export default function SpecialPromo() {
 
           <p>
             <Link to="/shop" className="btn btn-outline-white rounded-0">
-              Shop Now
+              Comprar ahora
             </Link>
           </p>
         </div>

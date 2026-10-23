@@ -1,14 +1,6 @@
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
-
-const homeLinks = [
-  { href: '/#products-section', label: 'Destacados' },
-  { href: '/#about-section', label: 'Nosotros' },
-  { href: '/#services-section', label: 'Servicios' },
-  { href: '/#testimonials-section', label: 'Testimonios' },
-  // { href: '/#blog-section', label: 'Blog' },
-  { href: '/#contact-section', label: 'Contacto' },
-]
+import { homeLinks } from '../data/navigation'
 
 export default function Header({ sticky, onMenuToggle }) {
   const location = useLocation()

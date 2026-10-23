@@ -1,4 +1,4 @@
-import { FaStar, FaHeart } from 'react-icons/fa'
+import { WHATSAPP_NUMBER } from '../data/contact'
 
 const products = [
   { id: 1, name: 'Shampoo Liss Care', desc: 'Limpia suavemente y prolonga el efecto del alisado, dejando tu cabello suave y brillante.', image: 'https://br-withered-tree-b5jjxkkj.storage.c-7.us-east-2.aws.neon.tech/marlestore/acondicionador_liss_care.webp', wishlist: false },
@@ -23,22 +23,26 @@ export default function Products() {
           {products.map((product) => (
             <div className="product-item" key={product.id}>
               <figure>
-                <img src={product.image} alt="Wild West Hoodie" />
+                <img src={product.image} alt={product.name} />
               </figure>
               <div className="px-4">
-                <h3><a href="#">{product.name}</a></h3>
-                <div className="mb-3">
+                <h3>{product.name}</h3>
+                {/* <div className="mb-3">
                   <span className="meta-icons mr-3">
                     <a href="#"><FaStar className="text-warning" /></a> 5.0
                   </span>
                   <span className={`meta-icons wishlist ${product.wishlist ? 'active' : ''}`}>
                     <a href="#"><FaHeart /></a> 29
                   </span>
-                </div>
+                </div> */}
                 <p className="mb-4">{product.desc}</p>
                 <div className="product-actions">
-                  <a href="#" className="btn btn-black rounded-0">Comprar</a>
-                  <a href="#" className="btn btn-outline-black rounded-0">Ver</a>
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`¡Hola! Quiero comprar ${product.name}. ¿Está disponible?`)}`}
+                    className="btn btn-black rounded-0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >Comprar</a>
                 </div>
               </div>
             </div>

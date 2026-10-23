@@ -3,7 +3,7 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { useCart } from './CartProvider'
 import { FaStar, FaTimes, FaWhatsapp, FaTag, FaShieldAlt, FaTruck } from 'react-icons/fa'
 
-const WHATSAPP_NUMBER = '50900184348' // ← cambia este número al tuyo
+import { WHATSAPP_NUMBER } from '../data/contact'
 
 export default function ProductDetail({ product, onClose }) {
   const { addItem } = useCart()
@@ -55,7 +55,7 @@ export default function ProductDetail({ product, onClose }) {
         <div className="pd-body">
           {/* Imagen */}
           <div className="pd-media">
-            {product.badge && (
+            {product.badge?.label && (
               <span className={`pd-badge pd-badge--${product.badge.type}`}>
                 {product.badge.label}
               </span>
@@ -86,16 +86,11 @@ export default function ProductDetail({ product, onClose }) {
               <span className="pd-price">S/.{product.price}</span>
               {discount && (
                 <span className="pd-discount">
-                  <FaTag /> {discount}% OFF
+                  <FaTag /> {discount}% de descuento
                 </span>
               )}
             </div>
-
-            {/* Descripción placeholder */}
-            <p className="pd-desc">
-              Producto de alta calidad seleccionado especialmente para ti. Disponible para pedido
-              inmediato vía WhatsApp. Contáctanos y te atendemos al instante.
-            </p>
+            {product.description && <p className="pd-desc">{product.description}</p>}
 
             {/* Perks */}
             <ul className="pd-perks">
